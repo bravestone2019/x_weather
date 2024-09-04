@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import './App.css'; // Import your CSS file
+import './App.css'; 
 
 function App() {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
-  const [loading, setLoading] = useState(false); // State for loading message
-  const [error, setError] = useState(null); // State for error handling
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(null); 
 
-  const apiKey = '05c55433399c457abe1161531240309'; // Replace with your actual API key
+  const apiKey = '05c55433399c457abe1161531240309'; 
 
   const handleInputChange = (event) => {
     setCity(event.target.value);
@@ -15,8 +15,8 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true); // Start loading
-    setError(null); // Reset error state
+    setLoading(true); 
+    setError(null); 
 
     try {
       const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`);
@@ -27,13 +27,13 @@ function App() {
 
       const data = await response.json();
       
-      // Check if data contains current weather info
       if (data && data.current) {
         setWeatherData(data);
       } else {
         throw new Error('Invalid city name');
       }
     } catch (error) {
+      setError('Failed to fetch weather data'); 
       alert('Failed to fetch weather data');
     } finally {
       setLoading(false); 
@@ -46,10 +46,10 @@ function App() {
         <input type="text" value={city} onChange={handleInputChange} placeholder="Enter city name" />
         <button type="submit">Search</button>
       </form>
-      {loading && <p>Loading data…</p>} 
+      {loading && <p>Loading data...</p>} 
       {error && <p className="error">{error}</p>} 
       {weatherData && (
-        <div className="card-container">
+        <div className="weather-cards"> 
           <WeatherCard title="Temperature" value={`${weatherData.current.temp_c}°C`} />
           <WeatherCard title="Humidity" value={`${weatherData.current.humidity}%`} />
           <WeatherCard title="Condition" value={weatherData.current.condition.text} />

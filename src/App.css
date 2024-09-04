@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-.card-container {
+.weather-cards {
   padding: 18px;
   display: flex;
   justify-content: center;
@@ -20,6 +20,6 @@
   justify-content: center;
 }
 
-.weather-card title {
+.weather-cards title {
   font-weight: 500;
 }
